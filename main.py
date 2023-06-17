@@ -7,7 +7,7 @@ envoy_import = pd.DataFrame()
 
 envoy_import["First Name"] = crm_import["First Name"]
 envoy_import["Last Name"] = crm_import["Last Name"]
-envoy_import["Middle Initial"] = crm_import["Middle Name"]  # BROKEN
+envoy_import["Middle Initial"] = crm_import["Middle Name"].fillna('').astype(str).str[0]
 envoy_import["Suffix"] = crm_import["Suffix"]
 envoy_import["Mailing Name"] = crm_import["Salutation"]
 envoy_import["Email"] = crm_import["Email"]
