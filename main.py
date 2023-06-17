@@ -24,7 +24,19 @@ envoy_import["Anniversary"] = pd.to_datetime(crm_import["Closing Anniversary"], 
 envoy_import["Pronouns"] = crm_import["Pronouns"]
 envoy_import["FON"] = crm_import["Custom Farm: FON"]
 
-# Farms
+custom_farm_cols = [col for col in crm_import.columns if 'Custom Farm:' in col]
+print(custom_farm_cols)
+
+for index, row in crm_import.iterrows():
+    farms = []
+    for col in custom_farm_cols:
+        if row[col] == 'X':
+            farm_name = col.replace('Custom Farm: ', '')
+            if farm_name == "FON":
+                continue
+            farms.append(farm_name)
+
+    envoy_import.at[index, 'Farms'] = ';'.join(farms)
 
 envoy_import["Rank"] = crm_import["Rank"]
 envoy_import["Notes"] = crm_import["Contact Description"]
