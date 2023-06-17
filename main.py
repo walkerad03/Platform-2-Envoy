@@ -20,12 +20,11 @@ envoy_import["State"] = crm_import["State"]
 envoy_import["Zip Code"] = crm_import["Zip"]
 envoy_import["Birth Month"] = crm_import["Birthday"].fillna('').str.extract(r'-(\d{2})-', expand=False)
 envoy_import["Birth Day"] = crm_import["Birthday"].fillna('').str.extract(r'-(\d{2})$', expand=False)
-envoy_import["Anniversary"] = pd.to_datetime(crm_import["Closing Anniversary"], format='').dt.strftime('%m/%d/%Y')
+envoy_import["Anniversary"] = pd.to_datetime(crm_import["Closing Anniversary"]).dt.strftime('%m/%d/%Y')
 envoy_import["Pronouns"] = crm_import["Pronouns"]
 envoy_import["FON"] = crm_import["Custom Farm: FON"]
 
 custom_farm_cols = [col for col in crm_import.columns if 'Custom Farm:' in col]
-print(custom_farm_cols)
 
 for index, row in crm_import.iterrows():
     farms = []
