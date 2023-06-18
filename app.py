@@ -33,8 +33,6 @@ def upload():
 
         results.append(result)
 
-    print('\n'.join(results))
-
     return render_template('upload.html', csv_files=results)
 
 
@@ -58,4 +56,4 @@ def download_all_csv():
 if __name__ == "__main__":
     os.makedirs('uploads', exist_ok=True)
     os.makedirs('processed', exist_ok=True)
-    app.run(debug=True)
+    app.run(port=8080)
