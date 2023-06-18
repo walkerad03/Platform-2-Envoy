@@ -4,8 +4,15 @@
     <title>File Uploaded</title>
 </head>
 <body>
-    <h1>File uploaded!</h1>
+    <h1>Files Processed!</h1>
     <p><a href="/">Upload another file</a></p>
-    <p><a href="{{ download_link }}">Download output</a></p>
+    <br>
+    <h1>Download Files</h1>
+    <ul>
+        {% for csv_file in csv_files %}
+        <li><a href="{{ url_for('download', file_path=csv_file) }}">{{ csv_file }}</a></li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('download_all_csv', filenames=csv_files) }}">Download All Files</a>
 </body>
 </html>

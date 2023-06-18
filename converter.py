@@ -42,3 +42,5 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     envoy_import["Notes"] = crm_import["Contact Description"]
 
     envoy_import.to_csv(f"{output_filename}", index=False)
+
+    return output_filename

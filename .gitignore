@@ -1,5 +1,5 @@
 sample_data/*
-output.csv
 uploads/*
 processed/*
 __pycache__/*
+out.zip
