@@ -1,8 +1,7 @@
 import pandas as pd
-import sys
 
 
-def convert_to_envoy(filename: str) -> None:
+def convert_to_envoy(filename: str, output_filename: str) -> None:
     crm_import = pd.read_excel(io=filename)
 
     envoy_import = pd.DataFrame()
@@ -42,7 +41,4 @@ def convert_to_envoy(filename: str) -> None:
     envoy_import["Rank"] = crm_import["Rank"]
     envoy_import["Notes"] = crm_import["Contact Description"]
 
-    envoy_import.to_csv("output.csv", index=False)
-
-
-convert_to_envoy(filename=sys.argv[1])
+    envoy_import.to_csv(f"{output_filename}", index=False)

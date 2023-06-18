@@ -1,2 +1,5 @@
 sample_data/*
 output.csv
+uploads/*
+processed/*
+__pycache__/*
