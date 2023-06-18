@@ -12,7 +12,7 @@ cd Platform-2-Envoy
 
 Ensure you have Docker running on your machine, then:
 ```
-docker run platform-2-envoy
+docker run -p 8080:8080 platform-2-envoy
 ```
 
 The service should now be accessible through <http://localhost:8080>.
