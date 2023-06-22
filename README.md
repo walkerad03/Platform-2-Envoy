@@ -14,12 +14,15 @@ cd Platform-2-Envoy
 Docker Installation Page: https://www.docker.com/products/docker-desktop/
 
 Make sure you have [Docker Desktop][dd] installed and running on your machine. Then follow these steps:
-
-1. Run the application using Docker by executing the following command:
+1. Build the application:
+    ```
+    docker build -t platform-2-envoy .
+    ```
+2. Run the application using Docker by executing the following command:
     ```
     docker run -p 8080:8080 platform-2-envoy
     ```
-2. Once the application is running, you can access it through your web browser using the following URL: http://localhost:8080.
+3. Once the application is running, you can access it through your web browser using the following URL: http://localhost:8080.
 
 **Please Note:** In case you are using MacOS, it is possible that you will need to prefix your Docker commands with `sudo`, as Docker requires administrator privleges to run.
 
