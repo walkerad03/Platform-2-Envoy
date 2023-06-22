@@ -1,10 +1,12 @@
 FROM python:3.11.4
 
-WORKDIR /
+WORKDIR /app
 
-COPY requirements.txt .
+COPY . /app
+RUN mkdir -p /app/processed && mkdir -p /app/uploads
+
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
+EXPOSE 8080
 
-CMD ["waitress-serve", "app:app"]
+CMD ["waitress-serve", "--port=8080", "app:app"]
