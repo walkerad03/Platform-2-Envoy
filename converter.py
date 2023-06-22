@@ -1,7 +1,39 @@
+"""
+This module contains a function to convert a Pl@tform export file to
+Envoy format using pandas.
+
+The module requires the following dependency:
+- `pandas`
+
+Author: Walker Davis
+Date: June 22, 2023
+"""
+
 import pandas as pd
 
 
 def convert_to_envoy(filename: str, output_filename: str) -> None:
+    """
+    Converts an Excel file to Envoy format and saves it as a CSV file.
+
+    Parameters
+    ----------
+    filename : str
+        The path to the Excel file to be converted.
+    output_filename : str
+        The desired name for the output CSV file.
+
+    Returns
+    -------
+    None
+
+    Notes
+    -----
+    - The function reads the Excel file using pandas and performs the
+        necessary transformations to convert it to Envoy format.
+    - The resulting DataFrame is then saved as a CSV file with the
+        specified output filename.
+    """
     crm_import = pd.read_excel(io=filename)
 
     envoy_import = pd.DataFrame()
