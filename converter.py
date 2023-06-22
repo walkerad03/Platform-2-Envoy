@@ -44,8 +44,8 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     envoy_import["Suffix"] = crm_import["Suffix"]
     envoy_import["Mailing Name"] = crm_import["Salutation"]
     envoy_import["Email"] = crm_import["Email"]
-    envoy_import["Phone Number"] = crm_import["Mobile"].astype(int)
-    envoy_import["Second Phone Number"] = crm_import["Phone"].astype(int)
+    envoy_import["Phone Number"] = crm_import["Mobile"].astype("Int64")
+    envoy_import["Second Phone Number"] = crm_import["Phone"].astype("Int64")
     envoy_import["Address 1"] = crm_import["Address1"]
     envoy_import["Address 2"] = crm_import["Address2"]
     envoy_import["City"] = crm_import["City"]
