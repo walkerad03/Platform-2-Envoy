@@ -36,6 +36,8 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     """
     crm_import = pd.read_excel(io=filename)
 
+    print(f"Converting {filename}")
+
     envoy_import = pd.DataFrame()
 
     def _direct_copy(source_col: str, target_col: str) -> None:
