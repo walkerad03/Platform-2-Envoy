@@ -43,6 +43,9 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     def _direct_copy(source_col: str, target_col: str) -> None:
         if source_col in crm_import.columns:
             envoy_import[target_col] = crm_import[source_col]
+
+            if isinstance(envoy_import[target_col], str):
+                envoy_import[target_col].str.rstrip()
         else:
             print(f"Column not found: {source_col}")
 
@@ -57,14 +60,17 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     _direct_copy("Email", "Email")
 
     if "Mobile" in crm_import.columns:
-        envoy_import["Phone Number"] = crm_import["Mobile"].fillna('').astype(str).str.rstrip('.0')
+        envoy_import["Phone Number"] = crm_import["Mobile"].fillna('').astype(str).str.replace(r'\.0$', '', regex=True)
     if "Phone" in crm_import.columns:
-        envoy_import["Second Phone Number"] = crm_import["Phone"].fillna('').astype(str).str.rstrip('.0')
+        envoy_import["Second Phone Number"] = crm_import["Phone"].fillna('').astype(str).str.replace(r'\.0$', '', regex=True)
+
     _direct_copy("Address1", "Address 1")
     _direct_copy("Address2", "Address 2")
     _direct_copy("City", "City")
     _direct_copy("State", "State")
-    _direct_copy("Zip", "Zip Code")
+
+    if "Zip" in crm_import.columns:
+        envoy_import["Zip Code"] = crm_import["Zip"].fillna('').astype(str).str.replace(r'\.0$', '')
 
     if "Birthday" in crm_import.columns:
         envoy_import["Birth Month"] = crm_import["Birthday"].fillna('').str.extract(r'-(\d{2})-', expand=False)
