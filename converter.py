@@ -43,31 +43,34 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     def _direct_copy(source_col: str, target_col: str) -> None:
         if source_col in crm_import.columns:
             envoy_import[target_col] = crm_import[source_col]
+        else:
+            print(f"Column not found: {source_col}")
 
     _direct_copy("First Name", "First Name")
     _direct_copy("Last Name", "Last Name")
-    if ("Middle Name" in crm_import.columns):
+
+    if "Middle Name" in crm_import.columns:
         envoy_import["Middle Initial"] = crm_import["Middle Name"].fillna('').astype(str).str[0]
+
     _direct_copy("Suffix", "Suffix")
-    _direct_copy("Mailing Name", "Salutation")
+    _direct_copy("Salutation", "Mailing Name")
     _direct_copy("Email", "Email")
-    if ("Mobile" in crm_import.columns):
-        envoy_import["Phone Number"] = crm_import["Mobile"].fillna('').astype(str).str.replace('.0$','',regex=True)
-    if ("Phone" in crm_import.columns):
-        envoy_import["Second Phone Number"] = crm_import["Phone"].fillna('').astype(str).str.replace('.0$','',regex=True)
-    _direct_copy("Address 1", "Address1")
-    _direct_copy("Address 2", "Address2")
+
+    _direct_copy("Mobile", "Phone Number")
+    _direct_copy("Phone", "Second Phone Number")
+    _direct_copy("Address1", "Address 1")
+    _direct_copy("Address2", "Address 2")
     _direct_copy("City", "City")
     _direct_copy("State", "State")
-    if ("Zip" in crm_import.columns):
-        envoy_import["Zip Code"] = crm_import["Zip"].fillna('').astype(str).str.replace('.0$','',regex=True)
-    if ("Birthday" in crm_import.columns):
+    _direct_copy("Zip", "Zip Code")
+
+    if "Birthday" in crm_import.columns:
         envoy_import["Birth Month"] = crm_import["Birthday"].fillna('').str.extract(r'-(\d{2})-', expand=False)
         envoy_import["Birth Day"] = crm_import["Birthday"].fillna('').str.extract(r'-(\d{2})$', expand=False)
-    if ("Closing Anniversary" in crm_import.columns):
-        envoy_import["Anniversary"] = pd.to_datetime(crm_import["Closing Anniversary"]).dt.strftime('%m/%d/%Y')
+
+    _direct_copy("Closing Anniversary", "Anniversary")
     _direct_copy("Pronouns", "Pronouns")
-    _direct_copy("FON", "Custom Farm: FON")
+    _direct_copy("Custom Farm: FON", "FON")
 
     custom_farm_cols = [col for col in crm_import.columns if 'Custom Farm:' in col]
 
@@ -85,6 +88,6 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     _direct_copy("Rank", "Rank")
     _direct_copy("Notes", "Contact Description")
 
-    envoy_import.to_csv(f"{output_filename}", index=False)
+    envoy_import.to_csv(output_filename, index=False)
 
     return output_filename
