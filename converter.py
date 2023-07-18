@@ -56,8 +56,10 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     _direct_copy("Salutation", "Mailing Name")
     _direct_copy("Email", "Email")
 
-    _direct_copy("Mobile", "Phone Number")
-    _direct_copy("Phone", "Second Phone Number")
+    if "Mobile" in crm_import.columns:
+        envoy_import["Phone Number"] = crm_import["Mobile"].replace('', 0).astype("Int64").replace(0, '')
+    if "Phone" in crm_import.columns:
+        envoy_import["Second Phone Number"] = crm_import["Phone"].replace('', 0).astype("Int64").replace(0, '')
     _direct_copy("Address1", "Address 1")
     _direct_copy("Address2", "Address 2")
     _direct_copy("City", "City")
