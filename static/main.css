@@ -29,12 +29,14 @@ input {
 
 input[type=submit] {
     background-color: var(--accent);
+    color: var(--secondary);
     border: none;
     border-radius: 10px;
 }
 
 input[type=submit]:hover {
     background-color: var(--primary);
+    color: var(--text);
     cursor: pointer;
 }
 
@@ -50,6 +52,7 @@ input[type=submit]:hover {
     padding: 20px;
     border-radius: 10px;
     max-width: 500px;
+    width: 50%;
     margin: auto;
 }
 

@@ -2,17 +2,33 @@
 <html>
 <head>
     <title>File Uploaded</title>
+    <link rel="stylesheet" href="/static/upload.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200&display=swap" rel="stylesheet">
+    <script>
+        function downloadAllFiles() {
+            var url = "{{ url_for('download_all_csv', filenames=csv_files) }}";
+            window.location.href = url;
+        }
+    </script>
 </head>
 <body>
-    <h1>Files Processed!</h1>
-    <p><a href="/">Upload another file</a></p>
-    <br>
-    <h1>Download Files</h1>
-    <ul>
-        {% for csv_file in csv_files %}
-        <li><a href="{{ url_for('download', file_path=csv_file) }}">{{ csv_file }}</a></li>
-      {% endfor %}
-    </ul>
-    <a href="{{ url_for('download_all_csv', filenames=csv_files) }}">Download All Files</a>
+    <div class="main-container">
+        <div class="header-container">
+            <h1>Files Processed!</h1>
+            <button onclick="document.location='/'">Upload a different file</button>
+        </div>
+        <br>
+        <div class="download-container">
+            <h1>Download</h1>
+            <button onclick="downloadAllFiles()">Download All Files</button>
+            <ul>
+                {% for csv_file in csv_files %}
+                <li><a href="{{ url_for('download', file_path=csv_file) }}">{{ csv_file }}</a></li>
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
 </body>
 </html>
