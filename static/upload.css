@@ -1,0 +1,75 @@
+:root {
+    --text: #090b0c;
+    --background: #fcfdfd;
+    --primary: #a1e5ff;
+    --secondary: #d3dbde;
+    --accent: #637a83;
+    font-family: 'Fira Sans', sans-serif;
+}
+
+body {
+    background-color: var(--background);
+}
+
+h1 {
+    text-align: center;
+}
+
+.main-container {
+    height: 100%;
+    margin-top: 10%;
+    padding: 0px 0px;
+}
+
+.header-container {
+    background-color: var(--secondary);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 50%;
+    margin: auto;
+}
+
+.download-container {
+    background-color: var(--secondary);
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 50%;
+    margin: auto;
+}
+
+button {
+    width: 100%;
+    display: inline-block;
+    padding: 12px 20px;
+    color: var(--secondary);
+    font-size: medium;
+}
+
+button {
+    background-color: var(--accent);
+    border: none;
+    border-radius: 10px;
+}
+
+button:hover {
+    background-color: var(--primary);
+    color: var(--text);
+    cursor: pointer;
+}
+
+
+ul {
+    list-style-type: none;
+    padding-top: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+a:hover {
+    color: var(--accent);
+}
