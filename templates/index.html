@@ -2,12 +2,22 @@
 <html>
 <head>
     <title>Platform-2-Envoy</title>
+    <link rel="stylesheet" href="/static/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Sans:wght@200&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>File Upload</h1>
-    <form action="/upload" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" multiple>
-        <input type="submit">
-    </form>
+    <div class="main-container">
+        <h1>File Upload</h1>
+        <div class="form-container">
+            <form action="/upload" method="post" enctype="multipart/form-data">
+                <label for="fileUpload">Select a File</label>
+                <input type="file" name="file" id="fileUpload" required="required" multiple>
+                <hr>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
 </body>
 </html>
