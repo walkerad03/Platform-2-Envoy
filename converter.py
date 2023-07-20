@@ -34,7 +34,8 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     - The resulting DataFrame is then saved as a CSV file with the
         specified output filename.
     """
-    crm_import = pd.read_excel(io=filename)
+    crm_import = pd.read_excel(io=filename, dtype=str)
+    crm_import = crm_import.replace('nan', '')
 
     print(f"Converting {filename}")
 
@@ -58,19 +59,13 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     _direct_copy("Suffix", "Suffix")
     _direct_copy("Salutation", "Mailing Name")
     _direct_copy("Email", "Email")
-
-    if "Mobile" in crm_import.columns:
-        envoy_import["Phone Number"] = crm_import["Mobile"].fillna('').astype(str).str.replace(r'\.0$', '', regex=True)
-    if "Phone" in crm_import.columns:
-        envoy_import["Second Phone Number"] = crm_import["Phone"].fillna('').astype(str).str.replace(r'\.0$', '', regex=True)
-
+    _direct_copy("Mobile", "Phone Number")
+    _direct_copy("Phone", "Second Phone Number")
     _direct_copy("Address1", "Address 1")
     _direct_copy("Address2", "Address 2")
     _direct_copy("City", "City")
     _direct_copy("State", "State")
-
-    if "Zip" in crm_import.columns:
-        envoy_import["Zip Code"] = crm_import["Zip"].fillna('').astype(str).str.replace(r'\.0$', '')
+    _direct_copy("Zip", "Zip Code")
 
     if "Birthday" in crm_import.columns:
         envoy_import["Birth Month"] = crm_import["Birthday"].fillna('').str.extract(r'-(\d{2})-', expand=False)
