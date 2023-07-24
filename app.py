@@ -59,6 +59,9 @@ def upload():
         file.save(file_path)
 
         output_filename = f"{file.filename.removesuffix('.xlsx')}.csv"
+
+        if output_filename.startswith("CRM Export "):
+            output_filename = file.filename.removeprefix('CRM Export ')
         output_path = os.path.join('processed', output_filename)
         result = convert_to_envoy(file_path, output_path)
 
