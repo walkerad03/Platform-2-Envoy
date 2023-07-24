@@ -91,6 +91,13 @@ def convert_to_envoy(filename: str, output_filename: str) -> None:
     _direct_copy("Rank", "Rank")
     _direct_copy("Notes", "Contact Description")
 
+    init_row_count = envoy_import.shape[0]
+    # Drop columns where agent is listed as co-op agent.
+    envoy_import = envoy_import.drop(crm_import[crm_import.Agent == "X"].index)
+
+    postop_row_count = envoy_import.shape[0]
+    print(f"Rows removed: {init_row_count - postop_row_count}")
+
     envoy_import.to_csv(output_filename, index=False)
 
     return output_filename
